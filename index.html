@@ -1,36 +1,39 @@
 
 <h2 class="sr-only">Ontime — project timeline web app with Gantt chart, task board, and team collaboration</h2>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);background:var(--color-background-tertiary);color:var(--color-text-primary);font-size:13px}
-.app{display:grid;grid-template-columns:220px 1fr;grid-template-rows:52px 1fr;height:780px;border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)}
-.topbar{grid-column:1/-1;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;padding:0 16px;gap:12px}
-.logo{font-weight:500;font-size:15px;color:#7F77DD;letter-spacing:-.3px;display:flex;align-items:center;gap:6px}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#f5f3ff 0%,#f7fafc 45%,#f5f3ff 100%);color:var(--color-text-primary);font-size:13px;padding:18px;line-height:1.4;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.app{display:grid;grid-template-columns:220px 1fr;grid-template-rows:52px 1fr;height:780px;border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);box-shadow:0 18px 50px rgba(15,23,42,.12)}
+.topbar{grid-column:1/-1;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 16px;gap:12px}
+.logo{font-weight:600;font-size:15px;color:#7F77DD;letter-spacing:-.3px;display:flex;align-items:center;gap:6px;justify-content:center;grid-column:2;justify-self:center;min-width:90px}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:#7F77DD}
-.topbar-nav{display:flex;gap:2px;margin-left:8px}
+.topbar-nav{display:flex;gap:2px;justify-self:start;grid-column:1}
+.topbar-right{display:flex;align-items:center;gap:8px;justify-self:end;grid-column:3}
 .tnav{padding:5px 10px;border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-secondary);cursor:pointer;border:none;background:transparent}
 .tnav.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;cursor:pointer;flex-shrink:0}
 .av-bc{background:#EEEDFE;color:#534AB7}
 .av-r{background:#E1F5EE;color:#0F6E56}
 .add-btn{background:#7F77DD;color:#fff;border:none;border-radius:var(--border-radius-md);padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px}
 
-.sidebar{background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);padding:12px 0;overflow-y:auto;display:flex;flex-direction:column;gap:0}
+.sidebar{background:linear-gradient(180deg,#f8f7ff 0%,#fcfcfe 100%);border-right:0.5px solid var(--color-border-tertiary);padding:12px 0;overflow-y:auto;display:flex;flex-direction:column;gap:0}
 .sb-section{padding:0 12px;margin-bottom:4px}
-.sb-label{font-size:11px;color:var(--color-text-tertiary);font-weight:500;letter-spacing:.04em;padding:8px 8px 4px;text-transform:uppercase}
-.sb-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--border-radius-md);cursor:pointer;color:var(--color-text-secondary);font-size:12px;transition:background .1s}
-.sb-item:hover{background:var(--color-background-secondary)}
-.sb-item.active{background:#EEEDFE;color:#534AB7;font-weight:500}
+.sb-label{font-size:11px;color:var(--color-text-tertiary);font-weight:600;letter-spacing:.04em;padding:8px 8px 4px;text-transform:uppercase}
+.sb-item{width:100%;text-align:left;border:none;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--border-radius-md);cursor:pointer;color:var(--color-text-secondary);font-size:12px;transition:all .16s ease;background:transparent;margin-bottom:2px}
+.sb-item:hover{background:linear-gradient(135deg,rgba(127,119,221,.12),rgba(29,158,117,.08));transform:translateX(2px);color:var(--color-text-primary)}
+.sb-item.active{background:linear-gradient(135deg,#EEEDFE 0%,#F6F2FF 100%);color:#534AB7;font-weight:600;border:1px solid rgba(127,119,221,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
 .sb-item i{font-size:15px;flex-shrink:0}
 .sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sb-count{margin-left:auto;font-size:11px;background:var(--color-background-secondary);padding:1px 6px;border-radius:8px;color:var(--color-text-tertiary)}
 .sb-divider{height:0.5px;background:var(--color-border-tertiary);margin:6px 12px}
 
-.main{overflow:hidden;display:flex;flex-direction:column}
-.main-header{padding:14px 20px 10px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:10px;flex-shrink:0}
-.proj-title{font-size:16px;font-weight:500}
-.status-pill{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.main{overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,#ffffff 0%,#fcfcfe 100%)}
+.main-header{padding:14px 20px 10px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:10px;flex-shrink:0;background:linear-gradient(90deg,rgba(127,119,221,.08),rgba(255,255,255,0));border-left:3px solid var(--accent-color, #7F77DD)}
+.dashboard-focus{margin:12px 20px 0;padding:10px 12px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid rgba(127,119,221,.16);background:linear-gradient(135deg,rgba(127,119,221,.1),rgba(255,255,255,.96));color:#4f43b7;font-size:12px;font-weight:500}
+.dashboard-focus .accent-badge{padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.9);font-size:11px;color:var(--accent-color, #7F77DD)}
+.proj-title{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.status-pill{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.01em}
 .on-track{background:#E1F5EE;color:#0F6E56}
 .at-risk{background:#FAEEDA;color:#633806}
 .overdue{background:#FCEBEB;color:#791F1F}
@@ -39,9 +42,9 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
 .vtab.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
 .vtab i{font-size:14px}
 
-.content{flex:1;overflow:hidden;display:grid;grid-template-columns:1fr 300px}
-.gantt-panel{overflow:auto;display:flex;flex-direction:column}
-.detail-panel{border-left:0.5px solid var(--color-border-tertiary);overflow-y:auto;background:var(--color-background-primary)}
+.content{flex:1;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;padding:12px;background:linear-gradient(180deg,#f7fbff 0%,#eef6ff 100%)}
+.gantt-panel{overflow:auto;display:flex;flex-direction:column;background:linear-gradient(180deg,#f7fbff 0%,#eef6ff 100%);border:1px solid #dcecf8;border-radius:14px;padding:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.detail-panel{overflow-y:auto;background:linear-gradient(180deg,#fcfeff 0%,#f7fbff 100%);border:1px solid #dcecf8;border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
 
 .gantt-header{display:grid;grid-template-columns:220px 1fr;border-bottom:0.5px solid var(--color-border-tertiary);flex-shrink:0;background:var(--color-background-secondary)}
 .gh-tasks{padding:8px 12px;font-size:11px;font-weight:500;color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary)}
@@ -66,7 +69,7 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
 .milestone-diamond{position:absolute;top:50%;transform:translateY(-50%) rotate(45deg);width:12px;height:12px;border-radius:2px}
 
 .dp-head{padding:14px 16px 10px;border-bottom:0.5px solid var(--color-border-tertiary)}
-.dp-title{font-size:14px;font-weight:500;margin-bottom:4px}
+.dp-title{font-size:14px;font-weight:600;margin-bottom:4px;letter-spacing:-.01em}
 .dp-section{padding:12px 16px;border-bottom:0.5px solid var(--color-border-tertiary)}
 .dp-label{font-size:11px;color:var(--color-text-tertiary);font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
 .dp-val{font-size:12px;color:var(--color-text-primary)}
@@ -89,10 +92,19 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
 .chip-red{background:#FCEBEB;color:#791F1F}
 .chip-gray{background:var(--color-background-secondary);color:var(--color-text-secondary)}
 
-.toolbar-row{display:flex;gap:6px;padding:10px 20px 8px;border-bottom:0.5px solid var(--color-border-tertiary);flex-shrink:0;align-items:center}
-.tb-btn{padding:5px 10px;border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);background:transparent;cursor:pointer;display:flex;align-items:center;gap:4px}
+.toolbar-row{display:flex;gap:6px;padding:10px 20px 8px;border-bottom:0.5px solid var(--color-border-tertiary);flex-shrink:0;align-items:center;flex-wrap:wrap}
+.tb-btn{padding:5px 10px;border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);background:transparent;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s ease}
+.tb-btn:hover,.tb-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:#7F77DD;transform:translateY(-1px)}
 .tb-btn i{font-size:13px}
-.tb-search{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 10px;font-size:12px;color:var(--color-text-primary);background:transparent;display:flex;align-items:center;gap:6px;cursor:text;color:var(--color-text-tertiary)}
+.tb-search{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 10px;font-size:12px;color:var(--color-text-primary);background:transparent;display:flex;align-items:center;gap:6px;cursor:text;color:var(--color-text-tertiary);transition:all .15s ease}
+.tb-search:focus-within{border-color:#7F77DD;box-shadow:0 0 0 3px rgba(127,119,221,.14)}
+.tb-search input{border:none;background:transparent;outline:none;width:140px;font-size:12px;color:var(--color-text-primary)}
+.tb-search input::placeholder{color:var(--color-text-tertiary)}
+.stat-card{transition:transform .15s ease,box-shadow .15s ease}
+.stat-card:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.gantt-row{transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
+.gantt-row:hover{transform:translateX(2px)}
+.gantt-row.selected{box-shadow:inset 0 0 0 1px rgba(127,119,221,.2)}
 </style>
 
 <div class="app">
@@ -115,24 +127,24 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
   <div class="sidebar">
     <div class="sb-section">
       <div class="sb-label">Workspace</div>
-      <div class="sb-item active"><i class="ti ti-layout-grid" aria-hidden="true"></i> Overview</div>
-      <div class="sb-item"><i class="ti ti-check" aria-hidden="true"></i> My tasks <span class="sb-count">8</span></div>
-      <div class="sb-item"><i class="ti ti-bell" aria-hidden="true"></i> Inbox <span class="sb-count">3</span></div>
+      <button class="sb-item active" type="button" data-view="overview" data-title="Ontime App" data-copy="Overview • Your workspace is aligned and moving smoothly." data-badge="Live updates" data-color="#7F77DD"><i class="ti ti-layout-grid" aria-hidden="true"></i> Overview</button>
+      <button class="sb-item" type="button" data-view="my-tasks" data-title="My tasks" data-copy="My tasks • 8 items are waiting for your next move." data-badge="Focus" data-color="#1D9E75"><i class="ti ti-check" aria-hidden="true"></i> My tasks <span class="sb-count">8</span></button>
+      <button class="sb-item" type="button" data-view="inbox" data-title="Inbox" data-copy="Inbox • 3 updates need your attention." data-badge="Alerts" data-color="#D85A30"><i class="ti ti-bell" aria-hidden="true"></i> Inbox <span class="sb-count">3</span></button>
     </div>
     <div class="sb-divider"></div>
     <div class="sb-section">
       <div class="sb-label">Projects</div>
-      <div class="sb-item"><div class="sb-dot" style="background:#7F77DD"></div> Ontime App <span class="sb-count">14</span></div>
-      <div class="sb-item"><div class="sb-dot" style="background:#1D9E75"></div> Design System <span class="sb-count">9</span></div>
-      <div class="sb-item"><div class="sb-dot" style="background:#D85A30"></div> API Integration <span class="sb-count">6</span></div>
-      <div class="sb-item"><div class="sb-dot" style="background:#378ADD"></div> Marketing Site <span class="sb-count">5</span></div>
+      <button class="sb-item" type="button" data-view="project" data-project="Ontime App" data-copy="Ontime App • Product milestone is on track." data-badge="On track" data-color="#7F77DD"><div class="sb-dot" style="background:#7F77DD"></div> Ontime App <span class="sb-count">14</span></button>
+      <button class="sb-item" type="button" data-view="project" data-project="Design System" data-copy="Design System • UI polish is ready for review." data-badge="Review" data-color="#1D9E75"><div class="sb-dot" style="background:#1D9E75"></div> Design System <span class="sb-count">9</span></button>
+      <button class="sb-item" type="button" data-view="project" data-project="API Integration" data-copy="API Integration • Backend sync is nearly complete." data-badge="In progress" data-color="#D85A30"><div class="sb-dot" style="background:#D85A30"></div> API Integration <span class="sb-count">6</span></button>
+      <button class="sb-item" type="button" data-view="project" data-project="Marketing Site" data-copy="Marketing Site • Launch assets are being finalized." data-badge="Ready" data-color="#378ADD"><div class="sb-dot" style="background:#378ADD"></div> Marketing Site <span class="sb-count">5</span></button>
     </div>
     <div class="sb-divider"></div>
     <div class="sb-section">
       <div class="sb-label">Team</div>
-      <div class="sb-item"><div class="avatar av-bc" style="width:20px;height:20px;font-size:9px">BC</div> Bertrand Cius</div>
-      <div class="sb-item"><div class="avatar av-r" style="width:20px;height:20px;font-size:9px">R</div> Richard</div>
-      <div class="sb-item"><i class="ti ti-plus" style="font-size:13px" aria-hidden="true"></i> Invite member</div>
+      <button class="sb-item" type="button" data-view="team" data-title="Team" data-copy="Team • Bertrand and Richard are co-owning the current sprint." data-badge="Shared" data-color="#534AB7"><div class="avatar av-bc" style="width:20px;height:20px;font-size:9px">BC</div> Bertrand Cius</button>
+      <button class="sb-item" type="button" data-view="team" data-title="Team" data-copy="Team • Richard is reviewing design handoff." data-badge="Reviewing" data-color="#0F6E56"><div class="avatar av-r" style="width:20px;height:20px;font-size:9px">R</div> Richard</button>
+      <button class="sb-item" type="button" data-view="invite" data-title="Invite" data-copy="Invite • Share this workspace with a new teammate." data-badge="New" data-color="#7F77DD"><i class="ti ti-plus" style="font-size:13px" aria-hidden="true"></i> Invite member</button>
     </div>
   </div>
 
@@ -140,8 +152,8 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
 
     <div class="main-header">
       <div class="sb-dot" style="background:#7F77DD;width:10px;height:10px"></div>
-      <div class="proj-title">Ontime App</div>
-      <span class="status-pill on-track">On track</span>
+      <div class="proj-title" id="projectTitle">Ontime App</div>
+      <span class="status-pill on-track" id="projectStatus">On track</span>
       <div style="display:flex;align-items:center;gap:4px;margin-left:8px">
         <div class="avatar av-bc" style="width:22px;height:22px;font-size:9px;margin-right:2px" title="Bertrand Cius">BC</div>
         <div class="avatar av-r" style="width:22px;height:22px;font-size:9px" title="Richard">R</div>
@@ -154,17 +166,20 @@ body{font-family:var(--font-sans);background:var(--color-background-tertiary);co
     </div>
 
     <div id="view-timeline" style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+      <div class="dashboard-focus" id="dashboardFocus"><span id="focusLabel">Overview • Your workspace is aligned and moving smoothly.</span><span class="accent-badge" id="focusBadge">Live updates</span></div>
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-val">14</div><div class="stat-lbl">Total tasks</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#0F6E56">8</div><div class="stat-lbl">Completed</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#BA7517">4</div><div class="stat-lbl">In progress</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#A32D2D">2</div><div class="stat-lbl">At risk</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,rgba(127,119,221,.12),rgba(255,255,255,1));"><div class="stat-val">14</div><div class="stat-lbl">Total tasks</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,rgba(29,158,117,.12),rgba(255,255,255,1));"><div class="stat-val" style="color:#0F6E56">8</div><div class="stat-lbl">Completed</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,rgba(186,117,23,.14),rgba(255,255,255,1));"><div class="stat-val" style="color:#BA7517">4</div><div class="stat-lbl">In progress</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,rgba(163,45,45,.14),rgba(255,255,255,1));"><div class="stat-val" style="color:#A32D2D">2</div><div class="stat-lbl">At risk</div></div>
       </div>
       <div class="toolbar-row">
-        <button class="tb-btn"><i class="ti ti-filter" aria-hidden="true"></i> Filter</button>
-        <button class="tb-btn"><i class="ti ti-users" aria-hidden="true"></i> Assignee</button>
-        <button class="tb-btn"><i class="ti ti-calendar" aria-hidden="true"></i> Date range</button>
-        <div style="margin-left:auto;display:flex;gap:6px">
+        <button class="tb-btn filter-pill active" data-filter="all" onclick="setStatusFilter('all')"><i class="ti ti-filter" aria-hidden="true"></i> All</button>
+        <button class="tb-btn filter-pill" data-filter="in-progress" onclick="setStatusFilter('in-progress')"><i class="ti ti-progress" aria-hidden="true"></i> In progress</button>
+        <button class="tb-btn filter-pill" data-filter="done" onclick="setStatusFilter('done')"><i class="ti ti-check" aria-hidden="true"></i> Done</button>
+        <button class="tb-btn filter-pill" data-filter="not-started" onclick="setStatusFilter('not-started')"><i class="ti ti-circle" aria-hidden="true"></i> Not started</button>
+        <label class="tb-search" style="margin-left:auto"><i class="ti ti-search" style="font-size:13px" aria-hidden="true"></i><input id="taskSearch" type="text" placeholder="Search tasks" oninput="setSearch(this.value)"></label>
+        <div style="display:flex;gap:6px">
           <button class="tb-btn"><i class="ti ti-download" aria-hidden="true"></i> Export</button>
           <button class="tb-btn"><i class="ti ti-share" aria-hidden="true"></i> Share</button>
         </div>
@@ -217,6 +232,8 @@ const TASKS = [
 
 let selectedTask = TASKS.find(t=>t.id===15);
 let currentView = 'timeline';
+const uiState = { search:'', status:'all' };
+let activeSidebarContext = {title:'Ontime App', badge:'On track', color:'#7F77DD', copy:'Overview • Your workspace is aligned and moving smoothly.'};
 
 function dayX(d){return TASK_COL + d * COL_W;}
 function statusColor(s){return s==='done'?'#0F6E56':s==='in-progress'?'#BA7517':s==='not-started'?'#888780':'#A32D2D';}
@@ -224,6 +241,23 @@ function statusLabel(s){return s==='done'?'Done':s==='in-progress'?'In progress'
 function statusChip(s){const c=s==='done'?'chip-green':s==='in-progress'?'chip-amber':s==='not-started'?'chip-gray':'chip-red';return `<span class="chip ${c}">${statusLabel(s)}</span>`;}
 function ownerBg(o){return o==='BC'?'av-bc':'av-r';}
 function ownerName(o){return o==='BC'?'Bertrand Cius':'Richard';}
+
+function getVisibleTasks(){
+  const query=uiState.search.trim().toLowerCase();
+  return TASKS.filter(task=>{
+    if(task.type==='section') return true;
+    const matchesQuery=!query || task.name.toLowerCase().includes(query) || ownerName(task.owner).toLowerCase().includes(query);
+    const matchesStatus=uiState.status==='all' || task.status===uiState.status;
+    return matchesQuery && matchesStatus;
+  });
+}
+
+function syncSelection(){
+  const visibleIds=new Set(getVisibleTasks().filter(task=>!task.type).map(task=>task.id));
+  if(selectedTask && !visibleIds.has(selectedTask.id)){
+    selectedTask=TASKS.find(task=>visibleIds.has(task.id)) || null;
+  }
+}
 
 function buildMonthHeaders(){
   const months=['May','Jun'];
@@ -247,13 +281,14 @@ function buildMonthHeaders(){
 
 function buildGanttRows(){
   const totalW = DAYS * COL_W;
+  const visibleTasks=getVisibleTasks();
   let html='<div style="position:relative;min-width:'+(TASK_COL+totalW)+'px">';
   html+=`<div class="today-line" style="left:${TASK_COL+TODAY_OFFSET*COL_W}px"></div>`;
   for(let d=0;d<DAYS;d+=7){
     const isWeekend=false;
     html+=`<div style="position:absolute;left:${TASK_COL+d*COL_W}px;top:0;bottom:0;width:${7*COL_W}px;border-right:0.5px solid var(--color-border-tertiary);${d%14===0?'background:var(--color-background-secondary)':''};pointer-events:none;opacity:0.4"></div>`;
   }
-  TASKS.forEach(t=>{
+  visibleTasks.forEach(t=>{
     const isSel=selectedTask&&selectedTask.id===t.id;
     if(t.type==='section'){
       html+=`<div class="gantt-row section-row" style="min-height:32px">
@@ -353,7 +388,7 @@ function buildBoardView(){
   ];
   let html='<div style="display:flex;gap:12px;height:100%;overflow-x:auto;padding:16px">';
   cols.forEach(col=>{
-    const tasks=TASKS.filter(t=>!t.type&&t.status===col.status);
+    const tasks=getVisibleTasks().filter(t=>!t.type&&t.status===col.status);
     html+=`<div style="width:240px;flex-shrink:0;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:12px;display:flex;flex-direction:column;gap:8px;max-height:100%;overflow-y:auto">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
         <div style="width:8px;height:8px;border-radius:50%;background:${col.color}"></div>
@@ -381,7 +416,7 @@ function buildListView(){
   html+=`<div style="display:grid;grid-template-columns:1fr 120px 100px 80px 80px;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary);padding:8px 12px;font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em">
     <div>Task</div><div>Assignee</div><div>Due</div><div>Status</div><div>Priority</div>
   </div>`;
-  TASKS.filter(t=>!t.type||t.type==='section').forEach((t,i)=>{
+  getVisibleTasks().filter(t=>!t.type||t.type==='section').forEach((t,i)=>{
     if(t.type==='section'){
       html+=`<div style="background:var(--color-background-secondary);padding:6px 12px;font-size:11px;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)">${t.name}</div>`;
     } else {
@@ -413,6 +448,16 @@ function closeDetail(){
   render();
 }
 
+function setSearch(value){
+  uiState.search=value;
+  render();
+}
+
+function setStatusFilter(value){
+  uiState.status=value;
+  render();
+}
+
 function switchView(v){
   currentView=v;
   document.querySelectorAll('.vtab').forEach(b=>{
@@ -421,7 +466,42 @@ function switchView(v){
   render();
 }
 
+function setSidebarSelection(button){
+  const title=button.getAttribute('data-title') || button.getAttribute('data-project') || 'Ontime App';
+  const badge=button.getAttribute('data-badge') || 'On track';
+  const color=button.getAttribute('data-color') || '#7F77DD';
+  const copy=button.getAttribute('data-copy') || 'Overview • Your workspace is aligned and moving smoothly.';
+  activeSidebarContext={title,badge,color,copy};
+
+  document.querySelectorAll('.sb-item').forEach(item=>item.classList.toggle('active', item===button));
+  const projectTitle=document.getElementById('projectTitle');
+  const projectStatus=document.getElementById('projectStatus');
+  const focusLabel=document.getElementById('focusLabel');
+  const focusBadge=document.getElementById('focusBadge');
+  const mainHeader=document.querySelector('.main-header');
+  const mainPanel=document.getElementById('mainPanel');
+
+  if(projectTitle) projectTitle.textContent=title;
+  if(projectStatus){
+    projectStatus.textContent=badge;
+    projectStatus.className='status-pill';
+    projectStatus.classList.add(badge==='On track'?'on-track':badge==='Review'?'chip-blue':badge==='Focus'?'chip-green':badge==='Alerts'?'chip-amber':badge==='Ready'?'chip-green':'on-track');
+  }
+  if(focusLabel) focusLabel.textContent=copy;
+  if(focusBadge) focusBadge.textContent=badge;
+  if(mainHeader) mainHeader.style.setProperty('--accent-color', color);
+  if(mainPanel) mainPanel.style.setProperty('--accent-color', color);
+  render();
+}
+
 function render(){
+  syncSelection();
+  document.querySelectorAll('.filter-pill').forEach(btn=>{
+    btn.classList.toggle('active', btn.getAttribute('data-filter')===uiState.status);
+  });
+  const searchInput=document.getElementById('taskSearch');
+  if(searchInput) searchInput.value=uiState.search;
+
   const tl=document.getElementById('view-timeline');
   const bo=document.getElementById('view-board');
   const li=document.getElementById('view-list');
@@ -444,5 +524,10 @@ function render(){
   }
 }
 
+window.__appState={uiState,TASKS,getVisibleTasks};
+document.querySelectorAll('.sb-item').forEach(button=>{
+  button.addEventListener('click',()=>setSidebarSelection(button));
+});
+setSidebarSelection(document.querySelector('.sb-item.active'));
 render();
 </script>
