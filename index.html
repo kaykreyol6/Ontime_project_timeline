@@ -127,14 +127,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="sidebar">
     <div class="sb-section">
       <div class="sb-label">Workspace</div>
-      <button class="sb-item active" type="button" data-view="overview" data-title="Ontime App" data-copy="Overview • Your workspace is aligned and moving smoothly." data-badge="Live updates" data-color="#7F77DD"><i class="ti ti-layout-grid" aria-hidden="true"></i> Overview</button>
-      <button class="sb-item" type="button" data-view="my-tasks" data-title="My tasks" data-copy="My tasks • 8 items are waiting for your next move." data-badge="Focus" data-color="#1D9E75"><i class="ti ti-check" aria-hidden="true"></i> My tasks <span class="sb-count">8</span></button>
-      <button class="sb-item" type="button" data-view="inbox" data-title="Inbox" data-copy="Inbox • 3 updates need your attention." data-badge="Alerts" data-color="#D85A30"><i class="ti ti-bell" aria-hidden="true"></i> Inbox <span class="sb-count">3</span></button>
+      <button class="sb-item active" type="button" data-view="overview" data-title="Ontime Project Timeline" data-copy="Overview • The Ontime project timeline is progressing steadily." data-badge="Live updates" data-color="#7F77DD"><i class="ti ti-layout-grid" aria-hidden="true"></i> Overview</button>
+      <button class="sb-item" type="button" data-view="my-tasks" data-title="My tasks" data-copy="My tasks • 8 milestones are ready for your next move." data-badge="Focus" data-color="#1D9E75"><i class="ti ti-check" aria-hidden="true"></i> My tasks <span class="sb-count">8</span></button>
+      <button class="sb-item" type="button" data-view="inbox" data-title="Inbox" data-copy="Inbox • 3 project updates need your attention." data-badge="Alerts" data-color="#D85A30"><i class="ti ti-bell" aria-hidden="true"></i> Inbox <span class="sb-count">3</span></button>
     </div>
     <div class="sb-divider"></div>
     <div class="sb-section">
       <div class="sb-label">Projects</div>
-      <button class="sb-item" type="button" data-view="project" data-project="Ontime App" data-copy="Ontime App • Product milestone is on track." data-badge="On track" data-color="#7F77DD"><div class="sb-dot" style="background:#7F77DD"></div> Ontime App <span class="sb-count">14</span></button>
+      <button class="sb-item" type="button" data-view="project" data-project="Ontime Project Timeline" data-copy="Ontime Project Timeline • Product milestone is on track." data-badge="On track" data-color="#7F77DD"><div class="sb-dot" style="background:#7F77DD"></div> Ontime Project Timeline <span class="sb-count">14</span></button>
       <button class="sb-item" type="button" data-view="project" data-project="Design System" data-copy="Design System • UI polish is ready for review." data-badge="Review" data-color="#1D9E75"><div class="sb-dot" style="background:#1D9E75"></div> Design System <span class="sb-count">9</span></button>
       <button class="sb-item" type="button" data-view="project" data-project="API Integration" data-copy="API Integration • Backend sync is nearly complete." data-badge="In progress" data-color="#D85A30"><div class="sb-dot" style="background:#D85A30"></div> API Integration <span class="sb-count">6</span></button>
       <button class="sb-item" type="button" data-view="project" data-project="Marketing Site" data-copy="Marketing Site • Launch assets are being finalized." data-badge="Ready" data-color="#378ADD"><div class="sb-dot" style="background:#378ADD"></div> Marketing Site <span class="sb-count">5</span></button>
@@ -152,7 +152,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
     <div class="main-header">
       <div class="sb-dot" style="background:#7F77DD;width:10px;height:10px"></div>
-      <div class="proj-title" id="projectTitle">Ontime App</div>
+      <div class="proj-title" id="projectTitle">Ontime Project Timeline</div>
       <span class="status-pill on-track" id="projectStatus">On track</span>
       <div style="display:flex;align-items:center;gap:4px;margin-left:8px">
         <div class="avatar av-bc" style="width:22px;height:22px;font-size:9px;margin-right:2px" title="Bertrand Cius">BC</div>
@@ -208,32 +208,32 @@ const TODAY_OFFSET = 15;
 
 const TASKS = [
   {id:1,type:'section',name:'Discovery & Planning',color:'#888780'},
-  {id:2,name:'Requirements doc',owner:'BC',start:0,dur:7,status:'done',pct:100,color:'#7F77DD',deps:[],priority:'high',desc:'Complete the Ontime PRD covering all user journeys and success metrics.',comments:[{author:'Bertrand',text:'Finished and reviewed with Richard.',time:'2 days ago'}]},
-  {id:3,name:'Competitive analysis',owner:'R',start:2,dur:5,status:'done',pct:100,color:'#1D9E75',deps:[],priority:'medium',desc:'Benchmark Asana Timeline, ClickUp, and Monday.com feature sets.',comments:[{author:'Richard',text:'Asana is the clear reference. Notes shared.',time:'3 days ago'}]},
-  {id:4,name:'User interviews (5)',owner:'BC',start:5,dur:4,status:'done',pct:100,color:'#7F77DD',deps:[2],priority:'high',desc:'Conduct 5 user interviews with project managers and team leads.',comments:[]},
+  {id:2,name:'Project requirements',owner:'BC',start:0,dur:7,status:'done',pct:100,color:'#7F77DD',deps:[],priority:'high',desc:'Capture the Ontime project scope, user journeys, and success metrics for the timeline experience.',comments:[{author:'Bertrand',text:'Finished and reviewed with Richard.',time:'2 days ago'}]},
+  {id:3,name:'Market & competitor review',owner:'R',start:2,dur:5,status:'done',pct:100,color:'#1D9E75',deps:[],priority:'medium',desc:'Review similar planning tools and define the differentiators for the Ontime timeline experience.',comments:[{author:'Richard',text:'The competition helped shape the product direction.',time:'3 days ago'}]},
+  {id:4,name:'Stakeholder interviews',owner:'BC',start:5,dur:4,status:'done',pct:100,color:'#7F77DD',deps:[2],priority:'high',desc:'Gather feedback from product leads and project managers to shape the roadmap workflow.',comments:[]},
   {id:5,type:'section',name:'Design',color:'#1D9E75'},
-  {id:6,name:'Wireframes — Timeline',owner:'R',start:9,dur:8,status:'done',pct:100,color:'#1D9E75',deps:[4],priority:'high',desc:'Wireframe the Gantt canvas, task panel, and dependency arrows.',comments:[{author:'Richard',text:'Ready for Bertrand review.',time:'1 day ago'}]},
-  {id:7,name:'Design system tokens',owner:'R',start:9,dur:6,status:'done',pct:100,color:'#1D9E75',deps:[],priority:'medium',desc:'Define color, typography, spacing, and component tokens.',comments:[]},
-  {id:8,name:'High-fidelity mockups',owner:'R',start:16,dur:10,status:'in-progress',pct:65,color:'#1D9E75',deps:[6,7],priority:'high',desc:'Full Figma designs for all P0 screens including empty states.',comments:[{author:'Richard',text:'Timeline view done. Board view 40% complete.',time:'5 hours ago'}]},
+  {id:6,name:'Timeline wireframes',owner:'R',start:9,dur:8,status:'done',pct:100,color:'#1D9E75',deps:[4],priority:'high',desc:'Wireframe the Gantt canvas, task panel, and dependency arrows for the project dashboard.',comments:[{author:'Richard',text:'Ready for Bertrand review.',time:'1 day ago'}]},
+  {id:7,name:'Visual system tokens',owner:'R',start:9,dur:6,status:'done',pct:100,color:'#1D9E75',deps:[],priority:'medium',desc:'Define the color, typography, spacing, and component system for the Ontime experience.',comments:[]},
+  {id:8,name:'High-fidelity mockups',owner:'R',start:16,dur:10,status:'in-progress',pct:65,color:'#1D9E75',deps:[6,7],priority:'high',desc:'Build polished Figma screens for the timeline, board, and project detail views.',comments:[{author:'Richard',text:'Timeline view done. Board view 40% complete.',time:'5 hours ago'}]},
   {id:9,type:'section',name:'Engineering — Backend',color:'#378ADD'},
-  {id:10,name:'DB schema & migrations',owner:'BC',start:14,dur:5,status:'done',pct:100,color:'#7F77DD',deps:[4],priority:'high',desc:'Task, project, dependency, and milestone data models in PostgreSQL.',comments:[]},
-  {id:11,name:'REST API — Tasks CRUD',owner:'BC',start:18,dur:8,status:'in-progress',pct:70,color:'#7F77DD',deps:[10],priority:'high',desc:'Django REST endpoints for task create, read, update, delete.',comments:[{author:'Bertrand',text:'CRUD done. Working on dependency endpoints.',time:'1 day ago'}]},
-  {id:12,name:'Dependency engine',owner:'BC',start:25,dur:7,status:'in-progress',pct:30,color:'#7F77DD',deps:[11],priority:'high',desc:'Conflict detection and one-click rescheduling logic.',comments:[]},
-  {id:13,name:'WebSocket real-time sync',owner:'BC',start:30,dur:8,status:'not-started',pct:0,color:'#7F77DD',deps:[11],priority:'high',desc:'Live multi-user editing via Django Channels.',comments:[]},
+  {id:10,name:'Project data model',owner:'BC',start:14,dur:5,status:'done',pct:100,color:'#7F77DD',deps:[4],priority:'high',desc:'Model tasks, projects, milestones, and dependencies for the Ontime timeline system.',comments:[]},
+  {id:11,name:'Timeline API endpoints',owner:'BC',start:18,dur:8,status:'in-progress',pct:70,color:'#7F77DD',deps:[10],priority:'high',desc:'Build backend endpoints for creating, updating, and tracking project timeline entries.',comments:[{author:'Bertrand',text:'CRUD done. Working on dependency endpoints.',time:'1 day ago'}]},
+  {id:12,name:'Dependency logic',owner:'BC',start:25,dur:7,status:'in-progress',pct:30,color:'#7F77DD',deps:[11],priority:'high',desc:'Implement conflict detection and one-click rescheduling for project milestones.',comments:[]},
+  {id:13,name:'Real-time collaboration',owner:'BC',start:30,dur:8,status:'not-started',pct:0,color:'#7F77DD',deps:[11],priority:'high',desc:'Enable live collaboration and multi-user updates across the timeline workspace.',comments:[]},
   {id:14,type:'section',name:'Engineering — Frontend',color:'#D85A30'},
-  {id:15,name:'Gantt canvas component',owner:'BC',start:22,dur:9,status:'in-progress',pct:45,color:'#D85A30',deps:[8,11],priority:'high',desc:'Drag-and-drop Gantt bar rendering with virtual canvas.',comments:[{author:'Bertrand',text:'Bar rendering done. DnD in progress.',time:'3 hours ago'}]},
-  {id:16,name:'Task detail panel',owner:'R',start:26,dur:6,status:'not-started',pct:0,color:'#1D9E75',deps:[8],priority:'medium',desc:'Side panel with task info, comments, attachments.',comments:[]},
-  {id:17,name:'Dependency arrows UI',owner:'BC',start:30,dur:5,status:'not-started',pct:0,color:'#D85A30',deps:[15,12],priority:'high',desc:'Render SVG dependency arrows on the Gantt canvas.',comments:[]},
+  {id:15,name:'Interactive timeline canvas',owner:'BC',start:22,dur:9,status:'in-progress',pct:45,color:'#D85A30',deps:[8,11],priority:'high',desc:'Build the drag-and-drop Gantt experience for the Ontime project timeline.',comments:[{author:'Bertrand',text:'Bar rendering done. DnD in progress.',time:'3 hours ago'}]},
+  {id:16,name:'Project detail panel',owner:'R',start:26,dur:6,status:'not-started',pct:0,color:'#1D9E75',deps:[8],priority:'medium',desc:'Show task summaries, comments, and delivery context in the project detail view.',comments:[]},
+  {id:17,name:'Milestone connector UI',owner:'BC',start:30,dur:5,status:'not-started',pct:0,color:'#D85A30',deps:[15,12],priority:'high',desc:'Render clean dependency and milestone connectors on the timeline canvas.',comments:[]},
   {id:18,type:'section',name:'Launch',color:'#BA7517'},
   {id:19,type:'milestone',name:'MVP Handoff',owner:'BC',start:38,color:'#7F77DD',deps:[15,12,16],desc:'Bertrand and Richard sign off on all P0 requirements.',comments:[]},
-  {id:20,name:'QA & bug bash',owner:'R',start:36,dur:5,status:'not-started',pct:0,color:'#E24B4A',deps:[15,16,17],priority:'high',desc:'Cross-browser QA, accessibility audit, performance testing.',comments:[]},
-  {id:21,name:'Beta launch',owner:'BC',start:42,dur:7,status:'not-started',pct:0,color:'#7F77DD',deps:[20],priority:'high',desc:'Soft launch to 50 beta users for feedback.',comments:[]},
+  {id:20,name:'Launch QA & validation',owner:'R',start:36,dur:5,status:'not-started',pct:0,color:'#E24B4A',deps:[15,16,17],priority:'high',desc:'Run cross-browser QA, accessibility checks, and performance validation for the Ontime release.',comments:[]},
+  {id:21,name:'Release readiness review',owner:'BC',start:42,dur:7,status:'not-started',pct:0,color:'#7F77DD',deps:[20],priority:'high',desc:'Prepare the final rollout plan and soft launch for early users.',comments:[]},
 ];
 
 let selectedTask = TASKS.find(t=>t.id===15);
 let currentView = 'timeline';
 const uiState = { search:'', status:'all' };
-let activeSidebarContext = {title:'Ontime App', badge:'On track', color:'#7F77DD', copy:'Overview • Your workspace is aligned and moving smoothly.'};
+let activeSidebarContext = {title:'Ontime Project Timeline', badge:'On track', color:'#7F77DD', copy:'Overview • The Ontime project timeline is progressing steadily.'};
 
 function dayX(d){return TASK_COL + d * COL_W;}
 function statusColor(s){return s==='done'?'#0F6E56':s==='in-progress'?'#BA7517':s==='not-started'?'#888780':'#A32D2D';}
